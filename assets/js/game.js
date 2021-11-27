@@ -63,38 +63,38 @@ var fight = function(enemyNames) {
       // if no (false), ask question again by running fight() again
     else {
       window.alert("You need to pick a valid option. Try again!");
-      }
+    }
   }
 };
-// }
+
 // run fight function to start game
   var startGame = function () {
     playerHealth = 100;
     playerAttack = 10;
     playerMoney = 10;
 
-for (var i = 0; i < enemyNames.length; i++) {
-  if (playerHealth > 0) {
+  for (var i = 0; i < enemyNames.length; i++) {
+    if (playerHealth > 0) {
     window.alert("Welcome to Robot Gladiators! Round " + ( i + 1));
 
-  var pickedEnemyName = enemyNames[i];
+    var pickedEnemyName = enemyNames[i];
 
-  enemyHealth = 50;
-  // call fight function with enemy-robot
-  fight(pickedEnemyName);
-  if (playerHealth > 0 && i < enemyNames.length -1) {
-    // ask if player wants to use the store before next round
-    var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+    enemyHealth = 50;
+    // call fight function with enemy-robot
+    fight(pickedEnemyName);
+    if (playerHealth > 0 && i < enemyNames.length -1) {
+      // ask if player wants to use the store before next round
+      var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
 
-    // if yes, take them to the store() function
-    if (storeConfirm) {
-    shop();
-    }
+      // if yes, take them to the store() function
+      if (storeConfirm) {
+        shop();
+      }
     }
   }
-  else { 
-    window.alert("You have lost your robot in battle! GAME OVER!");
-    break;
+      else { 
+        window.alert("You have lost your robot in battle! GAME OVER!");
+        break;
       }
     }
 
@@ -118,7 +118,9 @@ for (var i = 0; i < enemyNames.length; i++) {
 
     var shop = function() {
       // ask player what they'd like to do
-      var shopOptionPrompt = window.prompt ("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', OR 'LEAVE' to make a choice.");
+      var shopOptionPrompt = window.prompt (
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', OR 'LEAVE' to make a choice."
+        );
       switch (shopOptionPrompt) {
         case "refill":
         case "REFILL":
