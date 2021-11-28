@@ -7,9 +7,6 @@ var getPlayerName = function() {
   while (name === "" || name === null) {
     name = prompt("What is your robot's name?");
   }
-// ***************************************
-// ADD LOOP HERE WITH PROMPT AND CONDITION
-// ***************************************
 
 console.log("Your robot's name is " + name);
 return name;
@@ -60,29 +57,41 @@ var enemyInfo = [
   }
 ];
 
-var fight = function(enemyInfo) {
-  console.log(enemyInfo);
-  // Alert players that they are starting the round
-  while(playerInfo.health > 0 && enemyInfo.health > 0) {
+var fightOrSkip = function() {
   var promptFight = window.prompt('Would you like to FIGHT or SKIP this battle? Enter "FIGHT" or "SKIP" to choose.');
 
-  // if player choses to skip
-  if (promptFight === "skip" || promptFight === "SKIP") {
+    if (promptFight === "" || promptFight === null) {
+      window.alert ("You need to provide a valid answer! Please try again.");
+      return fightOrSkip();
+    }
+
+   // if player choses to skip
+    promptFight = promptFight.toLowerCase();
+
+   if (promptFight === "skip") {
     // confirm player wants to skip
     var confirmSkip = window.confirm("Are you sure you'd like to quit?");
 
     // if yes (true), leave fight
     if (confirmSkip) {
-      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+    window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
       // subtract money from playerInfo.money for skipping
       playerInfo.money = Math.max(0, playerInfo.money - 10);
+
+      return true;
+    }
+  }
+var fight = function(enemyInfo) {
+  console.log(enemyInfo);
+  // Alert players that they are starting the round
+  while (playerInfo.health > 0 && enemyInfo.health > 0) {
+    // ask player if they'd like to fight or skip using fightOrSkip function
+    if (fightOrSkip()) {
       console.log("playerInfo.money", playerInfo.money);
       break;
     }
-    else  {
-      window.alert("You need to pick a valid option. Try again!");
-    }
   }
+  
 
   // if player choses to fight, fight
   if (promptFight === "fight" || promptFight === "FIGHT") {
