@@ -82,21 +82,23 @@ var fightOrSkip = function() {
     }
   }
 var fight = function(enemyInfo) {
-  console.log(enemyInfo);
+  var isPlayerTurn = true;
+
+    if (Math.random() > 0.5) {
+      isPlayerTurn = false;
+    }
+
   // Alert players that they are starting the round
   while (playerInfo.health > 0 && enemyInfo.health > 0) {
     // ask player if they'd like to fight or skip using fightOrSkip function
    if (fightOrSkip()) {
-      console.log("playerInfo.money", playerInfo.money);
       break;
     }
-  }
-  
-
-  // if player choses to fight, fight
-  if (promptFight === "fight" || promptFight === "FIGHT") {
-    // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
     var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+  }
+
+    if (promptFight === "fight" || promptFight === "FIGHT") {
+    // remove enemy's health by subtracting the amount set in the playerInfo.attack variable
     enemyInfo.health = Math.max(0, enemyInfo.health - damage);
     console.log(
       playerInfo.name + " attacked " + enemyInfo.name + ". " + enemyInfo.name + " now has " + enemyInfo.health + " health remaining."
@@ -105,14 +107,16 @@ var fight = function(enemyInfo) {
     // check enemy's health
     if (enemyInfo.health <= 0) {
       window.alert(enemyInfo.name + " has died!");
+
       playerInfo.money = playerInfo.money + 20;
       break;
     } else {
       window.alert(enemyInfo.name + " still has " + enemyInfo.health + " health left.");
     }
-
+   } else {
     // remove players's health by subtracting the amount set in the enemy.attack variable
     var damage = randomNumber(enemyInfo.attack - 3, enemyInfo.attack);
+
     playerInfo.health = Math.max(0, playerInfo.health - damage);
     console.log(
       enemyInfo.name + " attacked " + playerInfo.name + ". " + playerInfo.name + " now has " + playerInfo.health + " health remaining."
@@ -125,10 +129,7 @@ var fight = function(enemyInfo) {
       window.alert(playerInfo.name + " still has " + playerInfo.health + " health left.");
     }
   }
-      // if no (false), ask question again by running fight() again
-    else {
-      window.alert("You need to pick a valid option. Try again!");
-    }
+  isPlayerTurn = !isPlayerTurn;
   }
 };
 
