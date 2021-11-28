@@ -86,7 +86,7 @@ var fight = function(enemyInfo) {
   // Alert players that they are starting the round
   while (playerInfo.health > 0 && enemyInfo.health > 0) {
     // ask player if they'd like to fight or skip using fightOrSkip function
-    if (fightOrSkip()) {
+   if (fightOrSkip()) {
       console.log("playerInfo.money", playerInfo.money);
       break;
     }
@@ -183,8 +183,9 @@ var fight = function(enemyInfo) {
     var shop = function() {
       // ask player what they'd like to do
       var shopOptionPrompt = window.prompt (
-        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 'REFILL', 'UPGRADE', OR 'LEAVE' to make a choice."
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE."
         );
+        shopOptionPrompt = parseInt(shopOptionPrompt);
       switch (shopOptionPrompt) {
         case "refill":
         case "REFILL":
